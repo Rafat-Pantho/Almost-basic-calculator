@@ -1,17 +1,13 @@
-// Almost basic calculator
-// Can do basic calculations
-
-
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 
-typedef long long int ll;
+typedef long long ll;
 typedef unsigned int ui;
 
 #define f(i, n) for (ui i = 0; i < n; i++)
-#define max 10000000
+#define MAX_SIZE 1000
 
 ll operation(ll num1, ll num2, char op) {
     switch (op) {
@@ -22,40 +18,47 @@ ll operation(ll num1, ll num2, char op) {
         case '*':
             return num1 * num2;
         case '/':
-            return num2 ? num1 / num2 : -1; 
+            return num2 ? num1 / num2 : -1;
         default:
             return 0;
     }
 }
 
-ll resulting(char *user_input){
-    ll numbers[max]={0};
+ll resulting(const char *user_input) {
+    ll numbers[MAX_SIZE] = {0};
     ui i = 0;
-    char operators[max];
+    char operators[MAX_SIZE] = {0};
 
-    // separating numbers and operators
-    for(char *ptr = user_input;*ptr!='\0';ptr++){
-        if(isdigit(*ptr))numbers[i]=numbers[i]*10+(*ptr-'0');
-        else{
-            operators[i]=*ptr;
+    // Separating numbers and operators
+    for (const char *ptr = user_input; *ptr != '\0'; ptr++) {
+        if (isdigit(*ptr)) {
+            numbers[i] = numbers[i] * 10 + (*ptr - '0');
+        } else {
+            operators[i] = *ptr;
             i++;
         }
     }
 
-    f(j,i) {
+    f(j, i) {
         ll the_calculated = operation(numbers[0], numbers[j + 1], operators[j]);
-        if (the_calculated==-1) return -1;
-        numbers[0]=the_calculated;
+        if (the_calculated == -1) return -1;
+        numbers[0] = the_calculated;
     }
 
     return numbers[0];
 }
 
-int main(){
-    char iput_by_user[max];
-    scanf("%[^\n]s",iput_by_user);
+int main() {
+    char input_by_user[MAX_SIZE];
+    scanf("%[^\n]", input_by_user);
     
-    printf("%lld",resulting(iput_by_user));
-    
+    ll result = resulting(input_by_user);
+    if (result == -1) {
+        printf("Error: Division by zero\n");
+    }
+    else {
+        printf("%lld\n", result);
+    }
+
     return 0;
 }
