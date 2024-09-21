@@ -13,7 +13,7 @@ typedef unsigned int ui;
 
 typedef struct store_result{
     double result_of_calc;
-    int invalid;
+    int invalid;    
 }store_result;
 
 double operation(double num1, double num2, char op) {
