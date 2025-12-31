@@ -1,0 +1,5 @@
+{
+  "name": "Almost-basic-calculator",
+  "description": "A high-precision arithmetic calculator supporting advanced order of operations, exponentiation, and complex expressions, modeled after C-based logic.",
+  "requestFramePermissions": []
+}
